@@ -87,9 +87,21 @@
      "[def .PHONY] [operator :] clean",
      "[def clean] [operator :]",
      "	[operator -][builtin rm] edit [quote $(objects)]");
+  MT("order_prereq",
+     "[def TARGETS] [operator :] NORMAL-PREREQUISITES [operator |] ORDER-ONLY-PREREQUISITES");
      
+  MT("vpath",
+     "[builtin vpath] %.h ../headers",
+     "[builtin vpath] %.h",
+     "[builtin vpath]");
 
-
-
-
+  MT("static_pattern",
+     "[def bigoutput littleoutput] [operator :] %output [operator :] text.g",
+     "	generate text.g -$* > $@");
+  MT("double_colon",
+     "[def target][operator ::] prereq");
+  MT("export",
+     "[keyword export] [variable foo] = ${[variable bar]}",
+     "[keyword export] [variable baz]",
+     "[keyword export]");
 })();
