@@ -107,8 +107,11 @@
           return tok;
         } else {
           var tok = state.local.mode.token(stream, state.localState), m;
-          if (state.local.endScan && (m = state.local.endScan.exec(stream.current())))
+          if (state.local.endEol && stream.eol()) {
+            state.local = state.localState = null;
+          } else if (state.local.endScan && (m = state.local.endScan.exec(stream.current()))) {
             stream.pos = stream.start + m.index;
+          }
           return tok;
         }
       }
@@ -177,6 +180,7 @@
     state.local = {mode: mode,
                    end: spec.end && toRegex(spec.end),
                    endScan: spec.end && spec.forceEnd !== false && toRegex(spec.end, false),
+                   endEol: spec.endeol,
                    endToken: token && token.join ? token[token.length - 1] : token};
   }
 
