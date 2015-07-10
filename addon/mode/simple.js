@@ -93,9 +93,11 @@
 
   function tokenFunction(states, config) {
     return function(stream, state) {
+      console.log('-------------------------');
       if (state.pending) {
         var pend = state.pending.shift();
         if (state.pending.length == 0) state.pending = null;
+        console.log('%s "%s" at %d', pend.token, pend.text, stream.pos);
         stream.pos += pend.text.length;
         return pend.token;
       }
@@ -104,6 +106,7 @@
         if (state.local.end && stream.match(state.local.end)) {
           var tok = state.local.endToken || null;
           state.local = state.localState = null;
+          console.log('state.local: %s', tok)
           return tok;
         } else {
           var tok = state.local.mode.token(stream, state.localState), m;
@@ -112,6 +115,7 @@
           } else if (state.local.endScan && (m = state.local.endScan.exec(stream.current()))) {
             stream.pos = stream.start + m.index;
           }
+          console.log('state.local: %s', tok)
           return tok;
         }
       }
@@ -122,12 +126,17 @@
         var matches = (!rule.data.sol || stream.sol()) && stream.match(rule.regex);
         if (matches) {
           if (rule.data.next) {
+            console.log('next: %s -> %s', state.state, rule.data.next);
             state.state = rule.data.next;
           } else if (rule.data.push) {
+            console.log('push: %s', rule.data.push );
             (state.stack || (state.stack = [])).push(state.state);
             state.state = rule.data.push;
           } else if (rule.data.pop && state.stack && state.stack.length) {
+            let tmp = state.state;
             state.state = state.stack.pop();
+            console.log('%o', rule);
+            console.log('pop: %s -> %s', tmp, state.state );
           }
 
           if (rule.data.mode)
@@ -136,18 +145,24 @@
             state.indent.push(stream.indentation() + config.indentUnit);
           if (rule.data.dedent)
             state.indent.pop();
-          if (matches.length > 2) {
+          if (matches.length > 2) { // 1 for all matches, 1 for at least one group
             state.pending = [];
             for (var j = 2; j < matches.length; j++)
               if (matches[j])
                 state.pending.push({text: matches[j], token: rule.token[j - 1]});
             stream.backUp(matches[0].length - (matches[1] ? matches[1].length : 0));
+            console.log('%s "%s" at %d', rule.token[0], matches[1],
+                        stream.pos - (matches[1] ? matches[1].length : 0));
             return rule.token[0];
           } else if (rule.token && rule.token.join) {
+            console.log('rule.token[0] %s', rule.token[0]);
             return rule.token[0];
           } else {
+            console.log('%s "%s" at %d', rule.token, matches[0], stream.pos - matches[0].length);
             return rule.token;
           }
+        } else {
+          console.log('no match in %o', rule);
         }
       }
       stream.next();
