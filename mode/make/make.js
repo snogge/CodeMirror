@@ -40,9 +40,15 @@
         token: [null, 'keyword'],
         push: 'conditional'
       },
+      { sol: true, regex: /(\s*)(else)(\s+)(ifn?eq)/,
+        token: [null, 'keyword', null, 'keyword'], push: 'conditional'},
       { sol: true,
         regex: /(\s*)(ifdef)(\s+)([^#=:\s]+)/,
         token: [null, 'keyword', null, 'variable']
+      },
+      { sol:  true,
+        regex: /(\s*)(else)(\s+)(ifdef)(\s+)([^#=:\s]+)/,
+        token: [null, 'keyword', null, 'keyword', null, 'variable']
       },
       { sol: true,
         regex: /(\s*)(else|endif)/,

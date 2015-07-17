@@ -31,7 +31,8 @@
   
   MT("else_and_endif",
      "[keyword else]",
-     "[keyword endif]");
+     "[keyword endif]",
+     "[keyword else] [keyword ifeq] (lhs,rhs)");
 
   MT("assignment",
      "[variable name] [operator =] some text or other",
