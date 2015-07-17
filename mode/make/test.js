@@ -30,6 +30,7 @@
 
   MT("assignment",
      "[variable name] [operator =] some text or other",
+     "[keyword override] [variable name] [operator =] some text or other",
      "[variable name] [operator ?=] some ${[variable text]} or other",
      "[variable @%/] [operator :=] some $([variable text]${[variable frobnic]}) or other",
      "[variable foo_$(bar)] [operator !=] some text or $([variable other])",
@@ -101,7 +102,9 @@
   MT("double_colon",
      "[def target][operator ::] prereq");
   MT("export",
-     "[keyword export] [variable foo] = ${[variable bar]}",
-     "[keyword export] [variable baz]",
-     "[keyword export]");
+     "[keyword export] [variable foo] [operator =] ${[variable bar]}",
+     "[keyword export] baz",
+     "[keyword export]",
+     " [keyword unexport] foo",
+     " [keyword unexport] ");
 })();

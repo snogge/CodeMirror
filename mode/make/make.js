@@ -51,10 +51,17 @@
         token: [null,'builtin',null]},
       /* assigment */
       { sol: true,
+        regex: /(\s*)(export|override)(\s+)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
+        token: [null, 'keyword', null, 'variable', null, 'operator'],
+        push: 'text'
+      },
+      { sol: true,
         regex: /(\s*)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
         token: [null, 'variable', null, 'operator'],
         push: 'text'
       },
+      // export
+      { sol: true, regex: /(\s*)((?:un)?export)/, token: [null, 'keyword'], push: 'text'},
       /* define*/
       { sol: true,
         regex: /(\s*)(define)(\s+)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
