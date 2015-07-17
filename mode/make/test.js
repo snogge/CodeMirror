@@ -102,8 +102,8 @@
      "[builtin vpath]");
 
   MT("static_pattern",
-     "[def bigoutput littleoutput] [operator :] %output [operator :] text.g",
-     "	generate text.g -$* > $@");
+     "[def bigoutput littleoutput] [operator :] [tag %output] [operator :] text.g",
+     "	generate text.g [attribute -][def $*] > [def $@]");
   MT("double_colon",
      "[def target][operator ::] prereq");
   MT("export",

@@ -93,6 +93,10 @@
         token: [null, 'keyword', null],
         push: 'starttext'
       },
+      // static pattern target
+      { sol:true, regex: /(\s*)(.*?)(\s*)(:)(\s*)(.*?)(\s*)(:)/,
+        token: [null, 'def', null, 'operator', null, 'tag', null, 'operator', null],
+        push: 'startprereq' },
       // target
       { sol:true, regex: /(\s*)(.*?)(\s*)(:)(\s*$)/,
         token: [null,'def',null,'operator', null] },
