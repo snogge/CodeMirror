@@ -115,7 +115,8 @@
       { regex: /\$\{/, push: 'curlymacro' },
       { regex: /\$\(/, push: 'parenmacro' },
       { regex: /\$./,  token: 'variable'},
-      { regex: /[^#$;]/, token: null, next: 'prereq'},
+      { regex: /\|/, token: 'operator' },
+      { regex: /[^#$;|]/, token: null, next: 'prereq'},
     ],
     prereq: [
       { regex: /^/, sol:true, pop: true},
@@ -124,8 +125,9 @@
       { regex: /\$\{/, push: 'curlymacro' },
       { regex: /\$\(/, push: 'parenmacro' },
       { regex: /\$./,  token: 'variable'},
-      { regex: /[^#$;]*$/, pop: true},
-      { regex: /[^#$;]+/, token: null},
+      { regex: /\|/, token: 'operator' },
+      { regex: /[^#$;|]*$/, pop: true},
+      { regex: /[^#$;|]+/, token: null},
     ],
     samelinecmd: [
       { regex: /;/, token: 'operator',
