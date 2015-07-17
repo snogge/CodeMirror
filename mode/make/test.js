@@ -1,3 +1,8 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+// Make Highlighting for CodeMirror copyright (c) Ola Nilsson (ola.nilsson@gmail.com)
+
 (function () {
   var mode = CodeMirror.getMode({}, 'make');
   function MT(name) { test.mode(name, mode, Array.prototype.slice.call(arguments, 1)); }
@@ -6,7 +11,7 @@
      "[comment # a several words long comment]",
      "not comment [comment # a several words long comment]");
   
-  MT("ifeq_parens",
+  MT("ifeq_ifneq",
      "[keyword ifneq] (lhs,rhs)",
      "[keyword ifneq] 'lhs' 'rhs'",
      "[keyword ifneq] 'lhs' \"rhs\"",

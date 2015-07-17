@@ -1,3 +1,9 @@
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+// Make Highlighting for CodeMirror copyright (c) Ola Nilsson (ola.nilsson@gmail.com)
+
+
 (function(mod) {
   if (typeof exports == "object" && typeof module == "object") // CommonJS
     mod(require("../../lib/codemirror"), require("../../addon/mode/simple"), require("../shell/shell"));
@@ -13,18 +19,18 @@
       { regex: /#.*/, token: 'comment', pop: true},
       { regex: /\$\{/, push: 'curlymacro' },
       { regex: /\$\(/, push: 'parenmacro' },
-      { regex: /\$./,  token: 'variable'},
+      { regex: /\$./,  token: 'variable'}
     ];
     var states = {};
     states[start] = Array.from(commonrules);
     states[end] = Array.from(commonrules);
-    states[start].push({regex: new Regex('[^' + chars + ']'), next: end});
+    states[start].push({regex: new RegExp('[^' + chars + ']'), next: end});
     states[end].unshift({ regex: /^/, sol:true, pop: true});
-    states[end].push({regex: new Regex('[^' + chars + ']*$'), pop:true});
-    states[end].push({regex: new Regex('[^' + chars + ']+')});
+    states[end].push({regex: new RegExp('[^' + chars + ']*$'), pop:true});
+    states[end].push({regex: new RegExp('[^' + chars + ']+')});
     return states;
   }
-  
+
   CodeMirror.defineSimpleMode("make", {
     start: [
       { regex: /#.*/, token: 'comment'},
@@ -36,7 +42,7 @@
       },
       { sol: true,
         regex: /(\s*)(ifdef)(\s+)([^#=:\s]+)/,
-        token: [null, 'keyword', null, 'variable'],
+        token: [null, 'keyword', null, 'variable']
       },
       { sol: true,
         regex: /(\s*)(else|endif)/,
@@ -116,7 +122,7 @@
       { regex: /\$\(/, push: 'parenmacro' },
       { regex: /\$./,  token: 'variable'},
       { regex: /\|/, token: 'operator' },
-      { regex: /[^#$;|]/, token: null, next: 'prereq'},
+      { regex: /[^#$;|]/, token: null, next: 'prereq'}
     ],
     prereq: [
       { regex: /^/, sol:true, pop: true},
@@ -127,7 +133,7 @@
       { regex: /\$./,  token: 'variable'},
       { regex: /\|/, token: 'operator' },
       { regex: /[^#$;|]*$/, pop: true},
-      { regex: /[^#$;|]+/, token: null},
+      { regex: /[^#$;|]+/, token: null}
     ],
     samelinecmd: [
       { regex: /;/, token: 'operator',
@@ -143,7 +149,7 @@
       { regex: /(?:'[^']*'|"[^']*")\s+(?:'[^']*'|"[^']*")/,
         token: null,
         pop: true
-      },
+      }
     ],
     text: [
       { regex: /^/,       sol:true, pop: true},
@@ -153,14 +159,14 @@
       { regex: /\$./,     token: 'variable'},
       { regex: /$/,       pop: true},
       { regex: /[^#$]*$/, pop: true},
-      { regex: /[^#$]+/,  token: null},
+      { regex: /[^#$]+/,  token: null}
     ],
     starttext: [
       { regex: /#.*/, token: 'comment', pop: true},
       { regex: /\$\{/, push: 'curlymacro' },
       { regex: /\$\(/, push: 'parenmacro' },
       { regex: /\$./,  token: 'variable'},
-      { regex: /[^#$]/, token: null, next: 'text'},
+      { regex: /[^#$]/, token: null, next: 'text'}
     ],
     curlymacro: [
       { regex: /\$\{/, push: 'curlymacro' },
