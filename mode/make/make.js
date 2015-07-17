@@ -62,6 +62,10 @@
       },
       // export
       { sol: true, regex: /(\s*)((?:un)?export)/, token: [null, 'keyword'], push: 'text'},
+      // undefine
+      { sol: true, regex: /(\s*)(undefine)(\s)/, token: [null, 'keyword',null], push: 'text'},
+      { sol: true, regex: /(\s*)(override)(\s+)(undefine)(\s*)/,
+        token: [null, 'keyword',null,'keyword',null], push: 'text'},
       /* define*/
       { sol: true,
         regex: /(\s*)(define)(\s+)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,

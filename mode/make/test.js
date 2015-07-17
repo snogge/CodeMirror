@@ -107,4 +107,7 @@
      "[keyword export]",
      " [keyword unexport] foo",
      " [keyword unexport] ");
+  MT("undefine",
+     "[keyword undefine] foo bar baz",
+     "[keyword undefine] ${[variable foo]}");
 })();
