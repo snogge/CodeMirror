@@ -31,6 +31,14 @@
     return states;
   }
 
+  function nullarray(from) {
+    var out = [];
+    from.map(function(currentValue, index/*, array*/){
+      out.splice(index * 2, 0, null, currentValue);
+    });
+    return out;
+  }
+
   CodeMirror.defineSimpleMode("make", {
     start: [
       { regex: /#.*/, token: 'comment'},
