@@ -72,6 +72,16 @@
         token: [null, 'variable', null, 'operator'],
         push: 'text'
       },
+      { sol: true,
+        regex: /(\s*)(.*)(\s*)(:)(\s*)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
+        token: [null, 'def', null, 'operator', null, 'variable', null, 'operator'],
+        push: 'text'
+      },
+      { sol: true,
+        regex: /(\s*)(.*)(\s*)(:)(\s*)((?:(?:export|override|private)\s+?)+)(\s*)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
+        token: [null, 'def', null, 'operator', null, 'keyword', null, 'variable', null, 'operator'],
+        push: 'text'
+      },
       // export
       { sol: true, regex: /(\s*)((?:un)?export)/, token: [null, 'keyword'], push: 'text'},
       // undefine

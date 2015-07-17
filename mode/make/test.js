@@ -121,4 +121,13 @@
   MT("undefine",
      "[keyword undefine] foo bar baz",
      "[keyword undefine] ${[variable foo]}");
+
+  MT("target_specific_variable",
+     "[def prog][operator :] [variable CFLAGS] [operator =] -g",
+     "[def prog][operator :] [keyword private ] [variable CFLAGS] [operator =] -g",
+     "[def prog][operator :] [keyword override ][variable CFLAGS] [operator =] -g",
+     "[def prog][operator :] [keyword export ][variable CFLAGS] [operator =] -g",
+     "[def prog][operator :] [keyword export  private ]  [variable CFLAGS] [operator =] -g",
+     "[def prog][operator :] prog.o foo.o bar.o");
+
 })();
