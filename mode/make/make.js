@@ -73,10 +73,21 @@
         push: 'define'
       },
       { sol: true,
+        regex: /(\s*)(override)(\s+)(define)(\s+)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,
+        token: [null, 'keyword', null, 'keyword', null, 'variable', null, 'operator'],
+        push: 'define'
+      },
+      { sol: true,
         regex: /(\s*)(define)(\s+)([^#=:\s]+)/,
         token: [null, 'keyword', null, 'variable'],
         push: 'define'
       },
+      { sol: true,
+        regex: /(\s*)(override)(\s+)(define)(\s+)([^#=:\s]+)/,
+        token: [null, 'keyword', null, 'keyword', null, 'variable'],
+        push: 'define'
+      },
+      //include
       { sol: true,
         regex: /(\s*-?)(include)(\s+)/,
         token: [null, 'keyword', null],

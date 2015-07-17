@@ -48,6 +48,11 @@
      "some text or other ${[variable foo]} and some more $([variable text])",
      "[keyword endef]");
 
+  MT("override_define",
+     "[keyword override] [keyword define] [variable name]",
+     "@echo canned command [variable $@]",
+     "[keyword endef]");
+
   MT("include",
      "[keyword include] foo",
      "  [keyword include] foo",
