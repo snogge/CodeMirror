@@ -42,6 +42,13 @@
         regex: /(\s*)(else|endif)/,
         token: [null, 'keyword']
       },
+      // vpath
+      { sol: true, regex: /(\s*)(vpath)(\s+)([^\s]+)(\s*)$/,
+        token: [null,'builtin',null,'tag',null]},
+      { sol: true, regex: /(\s*)(vpath)(\s+)([^\s]+)(\s+)/,
+        token: [null,'builtin',null,'tag',null], push: 'text'},
+      { sol: true, regex: /(\s*)(vpath)(\s*)$/,
+        token: [null,'builtin',null]},
       /* assigment */
       { sol: true,
         regex: /(\s*)([^#=:\s]+)(\s*)((?:[!?+]|::?)?=)/,

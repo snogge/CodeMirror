@@ -91,8 +91,8 @@
      "[def TARGETS] [operator :] NORMAL-PREREQUISITES [operator |] ORDER-ONLY-PREREQUISITES");
      
   MT("vpath",
-     "[builtin vpath] %.h ../headers",
-     "[builtin vpath] %.h",
+     "[builtin vpath] [tag %.h] ../headers",
+     "[builtin vpath] [tag %.h]",
      "[builtin vpath]");
 
   MT("static_pattern",
