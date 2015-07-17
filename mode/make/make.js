@@ -98,9 +98,9 @@
         token: [null, 'def', null, 'operator', null, 'tag', null, 'operator', null],
         push: 'startprereq' },
       // target
-      { sol:true, regex: /(\s*)(.*?)(\s*)(:)(\s*$)/,
+      { sol:true, regex: /(\s*)(.*?)(\s*)(::?)(\s*$)/,
         token: [null,'def',null,'operator', null] },
-      { sol:true, regex: /(\s*)(.*?)(\s*)(:)/,
+      { sol:true, regex: /(\s*)(.*?)(\s*)(::?)/,
         token: [null,'def',null,'operator'],
         push: 'startprereq' },
       // action
